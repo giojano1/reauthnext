@@ -50,8 +50,8 @@ export default function RegisterPage() {
     <main className="flex justify-center items-center min-h-screen">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Register</CardTitle>
-          <CardDescription>Register for a new account.</CardDescription>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>Login to your account.</CardDescription>
         </CardHeader>
         <CardContent>
           {/* Email Field */}
