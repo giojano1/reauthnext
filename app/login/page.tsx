@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { passwordSchema } from "@/validation/passwordSchema";
+import { LoginWithCredentials } from "./action";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -43,6 +44,11 @@ export default function RegisterPage() {
   //   console.log(form);
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+    await LoginWithCredentials({
+      email: data.email,
+      password: data.password,
+    });
+
     console.log(data);
   };
 
