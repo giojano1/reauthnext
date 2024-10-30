@@ -60,8 +60,6 @@ export default function RegisterPage() {
         message: response?.message,
       });
     }
-
-    console.log(form.formState);
   };
 
   return (
