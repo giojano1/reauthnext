@@ -1,22 +1,11 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { FormProvider } from "react-hook-form";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,10 +13,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { passwordSchema } from "@/validation/passwordSchema";
 import { passwordMatchSchema } from "@/validation/passwordMatchSchema";
 import { changePassword } from "./action";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z
   .object({
@@ -37,7 +26,7 @@ const formSchema = z
 
 export default function ChangePasswordForm() {
   const router = useRouter();
-
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,6 +44,13 @@ export default function ChangePasswordForm() {
     });
     if (response?.error) {
       form.setError("root", { message: response.message });
+    } else {
+      toast({
+        title: "Password Changed",
+        description: "Your password has been updated",
+        className: "bg-green-500 text-white",
+      });
+      form.reset();
     }
   };
 

@@ -56,7 +56,7 @@ export const registerUser = async ({
 
     return {
       error: true,
-      message: "An error occurred.",
+      message: e.message,
     };
   }
 };
