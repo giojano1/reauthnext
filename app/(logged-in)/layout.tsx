@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import LogoutButton from "@/components/logout-button/LogoutButton";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 // თუ მომხამრებელი არ არის ავტორიზირებული, არ შეუშვა შიგნით არსებულ როუთებზე.
 export default async function LoggedInLayout({
@@ -9,6 +10,10 @@ export default async function LoggedInLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
